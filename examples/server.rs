@@ -47,7 +47,7 @@ async fn run_server() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let acceptor = TlsAcceptor::builder()
         .with_single_cert(certs, key)
         .map_err(|e| error(format!("{}", e)))?
-        .with_all_versions_alpn()
+        .with_http11_alpn()
         .with_incoming(incoming);
     let service = make_service_fn(|_| async { Ok::<_, io::Error>(service_fn(echo)) });
     let server = Server::builder(acceptor).serve(service);

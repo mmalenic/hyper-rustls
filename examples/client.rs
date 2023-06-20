@@ -67,7 +67,7 @@ async fn run_client() -> io::Result<()> {
     let https = hyper_rustls::HttpsConnectorBuilder::new()
         .with_tls_config(tls)
         .https_or_http()
-        .enable_http1()
+        .enable_all_versions()
         .build();
 
     // Build the hyper client from the HTTPS connector.
